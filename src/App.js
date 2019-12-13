@@ -4,6 +4,9 @@ import axios from "axios";
 import MainHead from "./components/mainHead/mainHead";
 import HeaderDescription from "./components/mainHead/headerDescription";
 import RandomDateButton from "../src/components/mainHead/randomDateButton";
+import DailyPhoto from "./components/dailyphotocards/dailyPhoto"
+import styled from "styled-components";
+
 function App() {
   const [apodData, setApodData] = useState([]);
   const [date, setDate] = useState("currentDate");
@@ -21,19 +24,26 @@ function App() {
   });
 }, []);
 
-  useEffect(() => {
+const Wrapper = styled.div`
+    background: #000000 url(${apodData.url});
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    padding-top: 42%;
+`;
 
-  }, [date])
+const OtherWrapper = styled.div`
+    background-color: gray
+`;
 
-  // axios.get("https://images-api.nasa.gov/search?media_type=image")
-  // .then(response => {
-  //   console.log(response.data.collection.items)
-  // })
   return (
     <div className="App">
+      <Wrapper>
       <MainHead displayPicture = {apodData} />
-      <RandomDateButton setDate = {setDate}/>
+      </Wrapper>
+      {/* <RandomDateButton setDate = {setDate}/> */}
       <HeaderDescription displayText = {apodData}/>
+      <OtherWrapper><DailyPhoto /></OtherWrapper>
     </div>
   );
 }
